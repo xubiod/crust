@@ -4,21 +4,30 @@ macro_rules! rule1 {
     (mangle $x:ident into a $y:ty) => {
         $x as $y
     };
-    ($(please)? make me a $struct_vis:vis struct called $name:ident with $($(and)? a field named $item_name:ident which is a $item_vis:vis $item_type:ty),*) => {
+    (
+        $(please)? make me a $struct_vis:vis struct called $name:ident with
+        $($(and)? a field named $item_name:ident which is a $item_vis:vis $item_type:ty),*
+    ) => {
         $struct_vis struct $name {
             $(
                 $item_vis $item_name: $item_type,
             )*
         }
     };
-    ($(please)? make me a $all_vis:vis enum called $name:ident with $($(and)? a variant called $item_name:ident $(that holds $($(and)? a $item_subtype:ty),*)?),*) => {
+    (
+        $(please)? make me a $all_vis:vis enum called $name:ident with $($(and)?
+        a variant called $item_name:ident $(that holds $($(and)? a $item_subtype:ty),*)?),*
+    ) => {
         $all_vis enum $name {
             $(
                 $item_name $(($($item_subtype,)*))? ,
             )*
         }
     };
-    ($(please)? make me a union called $name:ident that can either be $($(or)? a field named $item_name:ident which is a $item_type:ty),*) => {
+    (
+        $(please)? make me a union called $name:ident that can either be $($(or)?
+        a field named $item_name:ident which is a $item_type:ty),*
+    ) => {
         union $name {
             $(
                 $item_name: $item_type,
